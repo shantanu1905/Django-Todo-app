@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style1.css">
+    <title>Todolist-Home</title>
+  </head>
+  <body>
+
+
+
+
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Todo App 😉</a>
+      <ul>
+        <li class="nav-item dropdown">
+      <a class="navbar-brand dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 🏷️ Admin</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="admin">🧔🏻 Admin</a>
+      </div>
+    </li>
+      </ul>
+    
+  </div>
+</nav>
+<!--NAVBAR END-->
+
+<div class="pad">
+</div>
+<style>.pad {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+</style>
+
+
+
+
+
+<!--alert start here-->
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+<!--alert end here-->
+
+
+
+<!--List Table Start from Here-->
+<div class="container my-3">
+<h2 class="text-center">Here is your tasks list </h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Task Title</th>
+      <th scope="col">Task Description </th>
+      <th scope="col">Action </th>
+    </tr>
+  </thead>
+  <tbody>
+ <!--run a for loop here and iterate through all  th e tasks --> 
+ {% for Taskdata in Tasks %}
+ 
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{Taskdata.TaskTitle}}</td>
+      <td>{{Taskdata.taskdesc}}</td>
+        <!--Delete button action -->
+        <td><form action="{% url 'delete' Taskdata.id %}"
+        method="post" class="d-inline">{% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+        </form></td>
+        <!--Delete button action end  -->
+
+    </tr>
+
+    {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+<!--List Table End Here-->
+
+
+
+
+<!--redirect button-->
+<div id="mybutton">
+<a  class="feedback" href="/" >Add New Task</a>
+</div>
+
+
+
+
+
+
+   <!--footer -->
+ <footer class="container-fluid text-center mb-3 py-4">
+  <p style="font-size:20px" >Made with ❤ by Shantanu Nimkar 😉 </p> 
+</footer>
+<!--footer end -->
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
